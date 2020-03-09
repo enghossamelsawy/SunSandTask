@@ -1,4 +1,4 @@
-package com.task.sunsporttask.mainScreen.prenstation
+package com.task.sunsporttask.mainScreen.presentation
 
 sealed class MainStatus(var data: Any? = null) {
     object ShowLoading : MainStatus()

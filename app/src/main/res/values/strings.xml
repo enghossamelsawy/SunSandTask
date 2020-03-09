@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">SunSportTask</string>
     <string name="dismiss">dismiss</string>
+    <string name="no_item_found">No Item Found</string>
+    <string name="network_error">Network error</string>
+    <string name="network_error_message">Something went wrong while loading some data, please retry again</string>
+    <string name="retry">retry</string>
 </resources>

@@ -39,5 +39,6 @@
 
     <dimen name="ad_post_padding">12dp</dimen>
     <dimen name="home_post_ad_size">70dp</dimen>
+    <dimen name="large_image">200dp</dimen>
 
 </resources>

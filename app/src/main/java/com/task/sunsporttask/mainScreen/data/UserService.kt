@@ -5,9 +5,8 @@ import retrofit2.http.Query
 
 interface UserService {
 
-    @GET
+    @GET(".")
     suspend fun getUsers(
         @Query("page") page: Int,
-        @Query("results") numberOfItemPerPage: Int
-    ): MainUserResponse
+        @Query("results") numberOfItemPerPage: Int): MainUserResponse
 }

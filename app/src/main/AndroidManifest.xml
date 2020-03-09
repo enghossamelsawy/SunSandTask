@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.task.sunsporttask">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".AppClass"
         android:allowBackup="true"
@@ -12,8 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
+        <activity android:name=".detailsscreen.UserDetailsActivity"></activity>
         <activity
-            android:name=".mainScreen.prenstation.MainActivity"
+            android:name=".mainScreen.presentation.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

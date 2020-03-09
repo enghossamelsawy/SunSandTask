@@ -1,4 +1,4 @@
-package com.task.sunsporttask.mainScreen.prenstation
+package com.task.sunsporttask.mainScreen.presentation
 
 import android.view.LayoutInflater
 import android.view.View
@@ -37,9 +37,9 @@ class UserAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val user = userList[holder.adapterPosition]
         (holder as UserViewHolder).apply {
-            tvUser.text = "${user.name.first ?: ""} ${user.name.last ?: ""}"
+            tvUser.text = "${user.name?.first ?: ""} ${user.name?.last ?: ""}"
             tvGender.text = user.gender
-            imgUser.loadImageWithCaredEdgeFormResources(user.picture.thumbnail)
+            imgUser.loadImageWithCaredEdgeFormResources(user.picture?.large)
         }
         holder.itemView.setOnClickListener {
             onUserClicked(user)
