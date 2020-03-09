@@ -18,12 +18,9 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModel()
     private val linearLayoutManager by lazy { LinearLayoutManager(this) }
     private val userAdapter: UserAdapter by lazy {
-        UserAdapter(emptyList()) { onUerClicked(it) }
+        UserAdapter(emptyList(), ::onUerClicked)
     }
 
-    private fun onUerClicked(user: User) {
-
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,8 +37,19 @@ class MainActivity : AppCompatActivity() {
                 hideLoading()
                 showError(mainStatus.data as String)
             }
+            MainStatus.ShowUserListView -> {
+                if (mainStatus.data is List<*>)
+                    userAdapter.setList(mainStatus.data as List<User>)
+                recycleViewUserList.layoutManager = linearLayoutManager
+                recycleViewUserList.adapter = userAdapter
+
+            }
         }
 
+
+    }
+
+    private fun onUerClicked(user: User) {
 
     }
 

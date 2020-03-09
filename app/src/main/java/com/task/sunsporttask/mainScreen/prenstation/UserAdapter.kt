@@ -12,7 +12,7 @@ import com.task.sunsporttask.mainScreen.data.User
 import kotlinx.android.synthetic.main.item_user_layout.view.*
 
 class UserAdapter(
-    private val userList: List<User>,
+    private var userList: List<User>,
     private val onUserClicked: (User) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -23,6 +23,11 @@ class UserAdapter(
                 false
             )
         )
+    }
+
+    fun setList(userList: List<User>) {
+        this.userList = userList
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
