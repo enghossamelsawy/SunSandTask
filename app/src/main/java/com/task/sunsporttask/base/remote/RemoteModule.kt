@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder
 import com.task.sunsporttask.BuildConfig
 
 import com.task.sunsporttask.base.data.RemoteConstants
+import com.task.sunsporttask.base.interceptor.ErrorMappingInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
@@ -16,10 +17,12 @@ import java.util.concurrent.TimeUnit
 
 val remoteModule = module {
     single { HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY) }
+    single { ErrorMappingInterceptor() }
 
     single {
         val builder = OkHttpClient.Builder()
-        builder.connectTimeout(RemoteConstants.CONNECT_TIMEOUT, TimeUnit.SECONDS)
+        builder.addInterceptor(get<ErrorMappingInterceptor>())
+            .connectTimeout(RemoteConstants.CONNECT_TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(RemoteConstants.READ_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(RemoteConstants.WRITE_TIMEOUT, TimeUnit.SECONDS)
 

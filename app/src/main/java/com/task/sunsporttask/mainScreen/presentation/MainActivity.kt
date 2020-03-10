@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.task.sunsporttask.R
+import com.task.sunsporttask.base.ext.showNetworkErrorDialog
 import com.task.sunsporttask.base.ext.showSnakeBar
 import com.task.sunsporttask.detailsscreen.UserDetailsActivity
 import com.task.sunsporttask.mainScreen.data.User
@@ -48,6 +49,17 @@ class MainActivity : AppCompatActivity() {
     private fun updateUi(mainStatus: MainStatus?) {
         when (mainStatus) {
             MainStatus.DataError -> showError(mainStatus.data as String)
+            MainStatus.ConnectionError -> {
+                if (mainStatus.data == true) {
+                    showNetworkErrorDialog({
+                        userList.clear()
+                        viewModel.getUser()
+                    }, { finish() })
+                } else {
+                    showError(getString(R.string.timeout_error_message))
+                }
+
+            }
 
             MainStatus.ShowNoResults -> {
                 tvNoItems.visibility = View.VISIBLE

@@ -3,6 +3,7 @@ package com.task.sunsporttask.mainScreen.presentation
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.task.sunsporttask.base.exception.APIException
 import com.task.sunsporttask.mainScreen.data.IMainRepository
 import com.task.sunsporttask.mainScreen.data.User
 import kotlinx.coroutines.launch
@@ -62,8 +63,15 @@ class MainViewModel(private val repository: IMainRepository) : ViewModel() {
         } else {
             searchResultLoadingMutableLiveData.value = ViewLoadingState.HideLoadMoreLoading
         }
-        searchResultMutableLiveData.value = MainStatus.DataError.apply {
-            data = throwable.message
+        if (throwable is APIException) {
+            val isFirstPage = page == 0
+            searchResultMutableLiveData.value =
+                MainStatus.ConnectionError.apply { data = isFirstPage }
+        } else {
+            searchResultMutableLiveData.value = MainStatus.DataError.apply {
+                data = throwable.message
+            }
+
         }
 
     }
